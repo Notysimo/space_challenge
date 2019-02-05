@@ -1,0 +1,36 @@
+Included is a sample app and sample tests. Open SpecRunner.html and run the included specs. Both the source files and their respective specs are linked in the <head> of the SpecRunner.html.
+
+To start using Jasmine, replace the source/spec files with your own.
+
+Load the SpecRunner.html in your favorite browser
+Included is a sample app and sample tests. Open SpecRunner.html and run the included specs. Both the source files and their respective specs are linked in the <head> of the SpecRunner.html.
+
+To start using Jasmine, replace the source/spec files with your own.
+
+Load the SpecRunner.html in your favorite browser
+
+Included is a sample app and sample tests. Open SpecRunner.html and run the included specs. Both the source files and their respective specs are linked in the <head> of the SpecRunner.html.
+
+To start using Jasmine, replace the source/spec files with your own.
+
+Load the SpecRunner.html in your favorite browser
+Included is a sample app and sample tests. Open SpecRunner.html and run the included specs. Both the source files and their respective specs are linked in the <head> of the SpecRunner.html.
+
+To start using Jasmine, replace the source/spec files with your own.
+
+Load the SpecRunner.html in your favorite browser
+Included is a sample app and sample tests. Open SpecRunner.html and run the included specs. Both the source files and their respective specs are linked in the <head> of the SpecRunner.html.
+
+To start using Jasmine, replace the source/spec files with your own.
+
+Load the SpecRunner.html in your favorite browser
+Included is a sample app and sample tests. Open SpecRunner.html and run the included specs. Both the source files and their respective specs are linked in the <head> of the SpecRunner.html.
+
+To start using Jasmine, replace the source/spec files with your own.
+
+Load the SpecRunner.html in your favorite browser
+Included is a sample app and sample tests. Open SpecRunner.html and run the included specs. Both the source files and their respective specs are linked in the <head> of the SpecRunner.html.
+
+To start using Jasmine, replace the source/spec files with your own.
+
+Load the SpecRunner.html in your favorite browser
