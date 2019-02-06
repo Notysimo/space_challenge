@@ -1,6 +1,14 @@
 package mision_to_mars;
 
 
+/**
+ * This interface contains methods that will be implemented
+ * by Rocket class.
+ *
+ * @author Andres Uzeda
+ * @since February 6, 2019
+ * @version 1.0
+ */
 public interface Spaceship {
     /**
      * This method will verify if it's possible to launch a rocket
