@@ -3,7 +3,7 @@ package mision_to_mars;
 /**
  * This class consists of an item that will be carried in a rocket.
  * This class contains methods that let you modified access to
- * attributes of this class.
+ * attributes of this class
  *
  * @author Andres Uzeda
  * @since February 6, 2019

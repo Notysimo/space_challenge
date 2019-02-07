@@ -3,7 +3,7 @@ package mision_to_mars;
 
 /**
  * This interface contains methods that will be implemented
- * by Rocket class.
+ * by Rocket class
  *
  * @author Andres Uzeda
  * @since February 6, 2019
