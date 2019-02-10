@@ -1,16 +1,8 @@
-package mision_to_mars;
+package com.minios;
 
 import java.util.Random;
 
 public class U2 extends Rocket {
-
-    public static double getRocketU2Counter() {
-        return rocketU2Counter;
-    }
-
-    public static void setRocketU2Counter(double rocketU2Counter) {
-        U2.rocketU2Counter = rocketU2Counter;
-    }
 
     private static double rocketU2Counter;
     private final double maxWeight = 8000;
@@ -18,11 +10,20 @@ public class U2 extends Rocket {
     private final double weight = 10000;
     private double chanceLaunched;
     private double chanceLanded;
+    private double explosionRange = 0.04;
+    private  double crashRange = 0.08;
 
+    /**
+     * Constructor of U2.
+     */
     public U2() {
         this(0);
     }
 
+    /**
+     * Constructor of U2.
+     * @param lastWeight
+     */
     public U2(int lastWeight) {
         setMaxWeight(maxWeight);
         setCost(cost);
@@ -33,19 +34,32 @@ public class U2 extends Rocket {
         System.out.println("------------------------------------");
     }
 
-    public static double getRocketU1Counter() {
+    /**
+     * Gets RocketU2 Counter.
+     * @return U2 Counter.
+     */
+    public static double getRocketU2Counter() {
         return rocketU2Counter;
     }
 
-    public static void setRocketU1Counter(double rocketU1Counter) {
-        U2.rocketU2Counter = rocketU1Counter;
+    /**
+     * Sets RocketU2 Counter.
+     * @param rocketU2Counter - counter value.
+     */
+    public static void setRocketU2Counter(double rocketU2Counter) {
+        U2.rocketU2Counter = rocketU2Counter;
     }
 
+    /**
+     * Verifies if launch U1.
+     * @return True if Launch U1, False otherwise.
+     */
+    @Override
     public boolean launch() {
         System.out.println("\nLAUNCHING...");
         Random randomNumber = new Random();
         double rand = randomNumber.nextDouble();
-        chanceLaunched = 0.05 * getWeightCarried() / getMaxWeight();
+        chanceLaunched = explosionRange * getWeightCarried() / getMaxWeight();
 
         System.out.println("Cargo: " + getWeightCarried());
         if (chanceLaunched >= rand) {
@@ -58,11 +72,16 @@ public class U2 extends Rocket {
         }
     }
 
+    /**
+     * Verifies if land, False otherwise.
+     * @return True if Land U1, False otherwise.
+     */
+    @Override
     public boolean land() {
         System.out.println("\nLANDING...");
         Random randomNumber = new Random();
         double rand = randomNumber.nextDouble();
-        chanceLanded = 0.01 *  getWeightCarried()/ getMaxWeight();
+        chanceLanded = crashRange *  getWeightCarried()/ getMaxWeight();
 
         if (chanceLanded >= rand) {
             System.out.println("U1 CRASHED!!!");
@@ -74,34 +93,30 @@ public class U2 extends Rocket {
         }
     }
 
+    /**
+     * Gets getMaxWeight.
+     * @return double value.
+     */
     @Override
     public double getMaxWeight() {
         return maxWeight;
     }
 
+    /**
+     * Gets Cost value.
+     * @return double value.
+     */
     @Override
     public double getCost() {
         return cost;
     }
 
+    /**
+     * Gets Weight value.
+     * @return double value.
+     */
     @Override
     public double getWeight() {
         return weight;
-    }
-
-    public double getChanceLaunched() {
-        return chanceLaunched;
-    }
-
-    public void setChanceLaunched(double chanceLaunched) {
-        this.chanceLaunched = chanceLaunched;
-    }
-
-    public double getChanceLanded() {
-        return chanceLanded;
-    }
-
-    public void setChanceLanded(double chanceLanded) {
-        this.chanceLanded = chanceLanded;
     }
 }

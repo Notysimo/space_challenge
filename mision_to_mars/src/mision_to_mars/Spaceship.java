@@ -1,4 +1,4 @@
-package mision_to_mars;
+package com.minios;
 
 
 /**

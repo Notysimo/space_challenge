@@ -1,4 +1,4 @@
-package mision_to_mars;
+package com.minios;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
+
         final int phase1 = 1;
         final int phase2 = 2;
 
@@ -35,7 +36,5 @@ public class Main {
         System.out.println("=====Simulation Done=====Simulation Done=====Simulation Done=====\n");
         phase2Rockets = U1.getRocketU1Counter() - phase1Rockets;
         System.out.println("Rockets used for phase 2: " + phase2Rockets + "\n");
-
     }
-
 }

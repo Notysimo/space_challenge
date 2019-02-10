@@ -1,4 +1,4 @@
-package mision_to_mars;
+package com.minios;
 
 import java.util.Random;
 
@@ -10,11 +10,20 @@ public class U1 extends Rocket {
     private final double weight = 10000;
     private double chanceLaunched;
     private double chanceLanded;
+    private double explosionRange = 0.05;
+    private  double crashRange = 0.01;
 
+    /**
+     * Constructor of U1.
+     */
     public U1() {
         this(0);
     }
 
+    /**
+     * Constructor of U1.
+     * @param lastWeight .
+     */
     public U1(int lastWeight) {
         setMaxWeight(maxWeight);
         setCost(cost);
@@ -25,19 +34,32 @@ public class U1 extends Rocket {
         System.out.println("------------------------------------");
     }
 
+    /**
+     * Gets Rocket UI counter.
+     * @return - double value.
+     */
     public static double getRocketU1Counter() {
         return rocketU1Counter;
     }
 
+    /**
+     * Sets Rocket Ui counter.
+     * @param rocketU1Counter
+     */
     public static void setRocketU1Counter(double rocketU1Counter) {
         U1.rocketU1Counter = rocketU1Counter;
     }
 
+    /**
+     * Verifies if launch U1.
+     * @return True if Launch U1, False otherwise.
+     */
+    @Override
     public boolean launch() {
         System.out.println("\nLAUNCHING...");
         Random randomNumber = new Random();
         double rand = randomNumber.nextDouble();
-        chanceLaunched = 0.05 * getWeightCarried() / getMaxWeight();
+        chanceLaunched = explosionRange * getWeightCarried() / getMaxWeight();
 
         System.out.println("Cargo: " + getWeightCarried());
         if (chanceLaunched >= rand) {
@@ -50,11 +72,16 @@ public class U1 extends Rocket {
         }
     }
 
+    /**
+     * Verifies if land, False otherwise.
+     * @return True if Land U1, False otherwise.
+     */
+    @Override
     public boolean land() {
         System.out.println("\nLANDING...");
         Random randomNumber = new Random();
         double rand = randomNumber.nextDouble();
-        chanceLanded = 0.01 *  getWeightCarried()/ getMaxWeight();
+        chanceLanded = crashRange *  getWeightCarried()/ getMaxWeight();
 
         if (chanceLanded >= rand) {
             System.out.println("U1 CRASHED!!!");
@@ -66,34 +93,30 @@ public class U1 extends Rocket {
         }
     }
 
+    /**
+     * Gets getMaxWeight.
+     * @return double value.
+     */
     @Override
     public double getMaxWeight() {
         return maxWeight;
     }
 
+    /**
+     * Gets Cost value.
+     * @return double value.
+     */
     @Override
     public double getCost() {
         return cost;
     }
 
+    /**
+     * Gets Weight value.
+     * @return double value.
+     */
     @Override
     public double getWeight() {
         return weight;
-    }
-
-    public double getChanceLaunched() {
-        return chanceLaunched;
-    }
-
-    public void setChanceLaunched(double chanceLaunched) {
-        this.chanceLaunched = chanceLaunched;
-    }
-
-    public double getChanceLanded() {
-        return chanceLanded;
-    }
-
-    public void setChanceLanded(double chanceLanded) {
-        this.chanceLanded = chanceLanded;
     }
 }

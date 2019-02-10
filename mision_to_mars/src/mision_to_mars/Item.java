@@ -1,4 +1,4 @@
-package mision_to_mars;
+package com.minios;
 
 /**
  * This class consists of an item that will be carried in a rocket.
