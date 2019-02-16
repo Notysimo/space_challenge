@@ -1,146 +1,141 @@
-package com.minios;
+package mision_to_mars;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 /**
- * Created by ralphemerson on 11/23/2017.
+ * This class consists in the simulation for two rockets.
+ * This class contains methods creates a simulation
+ *
+ * @author Andres Uzeda
+ * @version 1.0
+ * @since February 6, 2019
  */
 public class Simulation {
-    private ArrayList<Item> items;
-    private ArrayList<Rocket> rocketU1;
-    private ArrayList<Rocket> rocketU2;
-    private boolean hasLanded = true;
-    private File phase1 = new File("phase-1.txt");
-    private File phase2 = new File("phase-2.txt");
 
-    public Simulation() {
-    }
-
-    public ArrayList<Item> loadItems(int phase) throws FileNotFoundException {
-
-        if (phase == 1) {
-            System.out.println("Loading phase 1");
-            loadPerPhaseItems(phase1);
-            System.out.println("Done loading phase 1");
-        } else {
-            System.out.println("Loading phase 2");
-            loadPerPhaseItems(phase2);
-            System.out.println("Done loading phase 2\n");
+    /**
+     * This method returns a list of items in a document
+     * path e.g "items_to_load/phase-1.txt"
+     *
+     * @return a list of items
+     */
+    public ArrayList<Item> readData(String path) {
+        try {
+            return getAlistItem(path);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-
-        return items;
+        return null;
     }
 
-    public void loadPerPhaseItems(File file) throws FileNotFoundException {
-        items = new ArrayList<>();
-        Scanner fileScanner = new Scanner(file);
-
-        while (fileScanner.hasNextLine()) {
-            String string = fileScanner.nextLine();
-            String[] separated = string.split("=");
-
-            Item item = new Item(separated[0], Integer.parseInt(separated[1]));
-            items.add(item);
-        }
-    }
-
-    public ArrayList<Rocket> loadU1(List<Item> itemsU1) {
-        System.out.println("loading U1...");
-        rocketU1 = new ArrayList<>();
-        Rocket rocket = new U1();
-        Iterator iterator = itemsU1.iterator();
-
-        while (iterator.hasNext()) {
-            Item item = (Item) iterator.next();
+    /**
+     * This method returns a list of items in a rocket
+     *
+     * @param rocket
+     * @param listOfItemsToCarry
+     * @return this method returns a list of items loaded in a rocket
+     */
+    public ArrayList<Item> loadItems(Rocket rocket, ArrayList<Item> listOfItemsToCarry) {
+        System.out.println("Adding Items to ".concat(rocket.getClass().getTypeName()));
+        ArrayList<Item> listOfItemsCarriedInARocket = new ArrayList<>();
+        for (Item item : listOfItemsToCarry) {
             if (rocket.canCarry(item)) {
-                rocket.carry(item);
-            } else {
-                rocketU1.add(rocket);
-                rocket = new U1();
-                System.out.println("New U1 rocket created");
-                rocket.carry(item);
-            }
-            if (!iterator.hasNext()) {
-                rocketU1.add(rocket);
+                rocket.setWeightCarried(item.getWeight());
+                listOfItemsCarriedInARocket.add(item);
             }
         }
-
-        return rocketU1;
+        return listOfItemsCarriedInARocket;
     }
 
-    public ArrayList<Rocket> loadU2(ArrayList<Item> itemsU2) {
-        System.out.println("loading U2");
-        rocketU2 = new ArrayList<>();
-        Rocket rocket = new U2();
-        Iterator iterator = itemsU2.iterator();
+    /**
+     * This method run simulation for two rockets
+     */
+    public void runSimulation() {
+        //create a rockets
+        U1 U1Rocket = new U1();
+        U2 U2Rocket = new U2();
+        System.out.println("\u001B[1mAdd items to rockets for the phase 1");
+        ArrayList<Item> itemsLoadedInARocketU1Phase1 = loadItems(U1Rocket,
+                readData("items_to_load/phase-1.txt"));
+        printAListOfItems(itemsLoadedInARocketU1Phase1, U1Rocket.getClass().getName());
+        ArrayList<Item> itemsLoadedInARocketU2Phase1 = loadItems(U2Rocket,
+                readData("items_to_load/phase-1.txt"));
+        printAListOfItems(itemsLoadedInARocketU2Phase1, U2Rocket.getClass().getName());
+        System.out.println("\u001B[1mFirst phase starts");
+        phase(U1Rocket);
+        phase(U2Rocket);
+        System.out.println("\u001B[1mAdd items to rockets for the phase 2");
+        ArrayList<Item> itemsLoadedInARocketU1Phase2 = loadItems(U1Rocket,
+                readData("items_to_load/phase-2.txt"));
+        printAListOfItems(itemsLoadedInARocketU1Phase2, U1Rocket.getClass().getName());
+        ArrayList<Item> itemsLoadedInARocketU2Phase2 = loadItems(U2Rocket,
+                readData("items_to_load/phase-2.txt"));
+        printAListOfItems(itemsLoadedInARocketU2Phase2, U2Rocket.getClass().getName());
+        System.out.println("\u001B[1mSecond phase starts");
+        phase(U1Rocket);
+        phase(U2Rocket);
+    }
 
-        while (iterator.hasNext()) {
-            Item item = (Item) iterator.next();
-            if (rocket.canCarry(item)) {
-                rocket.carry(item);
-            } else {
-                rocketU2.add(rocket);
-                rocket = new U2();
-                System.out.println("New U2 rocket created");
-                rocket.carry(item);
-            }
-            if (!iterator.hasNext()) {
-                rocketU2.add(rocket);
-            }
+    /**
+     * This method do a launching, landing and free the items
+     *
+     * @param rocket
+     */
+    private void phase(Rocket rocket) {
+        rocket.launch();
+        rocket.land();
+        rocket.setWeightCarried(0);
+    }
+
+    /**
+     * This method return a list of each line in a document
+     *
+     * @param path
+     * @return list of each line in a document
+     * @throws FileNotFoundException
+     */
+    private ArrayList<String> getAlistItemsFromAFile(String path) throws FileNotFoundException {
+        ArrayList<String> listOfStrings = new ArrayList<>();
+        File file = new File(path);
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            listOfStrings.add(line);
         }
-
-        return rocketU2;
+        return listOfStrings;
     }
 
-    public void runSimulation(ArrayList<Rocket> rockets, int i) {
+    /**
+     * This method return a list of items
+     *
+     * @param path
+     * @return a list of Item
+     * @throws FileNotFoundException
+     */
+    private ArrayList<Item> getAlistItem(String path) throws FileNotFoundException {
+        ArrayList<String> ListOfStrings = getAlistItemsFromAFile(path);
+        ArrayList<Item> ListItems = new ArrayList<>();
+        for (String aString : ListOfStrings
+        ) {
+            String[] arrayWords = aString.trim().split("=");
+            Item item = new Item(arrayWords[0], Integer.valueOf(arrayWords[1]));
+            ListItems.add(item);
+        }
+        return ListItems;
+    }
 
-        for (Rocket rocket : rockets) {
-
-            while (!rocket.launch()) {
-                launchSimulation(i);
-            }
-
-            while (!rocket.land()) {
-                while (!rocket.launch()) {
-                    launchSimulation(i);
-                }
-                landSimulation(i);
-            }
-
+    /**
+     * This method print a list of items by console
+     */
+    private void printAListOfItems(ArrayList<Item> itemList, String rocketName) {
+        System.out.println("The following items were added to " + rocketName + " Rocket:");
+        for (Item item : itemList) {
+            System.out.println(String.format("Item: %1$s " +
+                    " Weight: %2$s", item.getName(), item.getWeight()));
         }
     }
 
-    public void launchSimulation(int i) {
-
-        if (i == 1) {
-            double counter1 = U1.getRocketU1Counter();
-            counter1++;
-            U1.setRocketU1Counter(counter1);
-
-        } else {
-            double counter1 = U2.getRocketU2Counter();
-            counter1++;
-            U2.setRocketU2Counter(counter1);
-
-        }
-    }
-
-    public void landSimulation(int i) {
-        if (i == 1) {
-            double counter = U1.getRocketU1Counter();
-            counter++;
-            U1.setRocketU1Counter(counter);
-
-        } else {
-            double counter = U2.getRocketU2Counter();
-            counter++;
-            U2.setRocketU2Counter(counter);
-        }
-        hasLanded = false;
-    }
 }

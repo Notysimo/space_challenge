@@ -1,4 +1,4 @@
-package com.minios;
+package mision_to_mars;
 
 import java.util.Random;
 
@@ -63,11 +63,11 @@ public class U2 extends Rocket {
 
         System.out.println("Cargo: " + getWeightCarried());
         if (chanceLaunched >= rand) {
-            System.out.println("U1 EXPLODED!!!");
+            System.out.println("U2 EXPLODED!!!");
             System.out.println("...Sending another rocket because it exploded...");
             return false;
         } else {
-            System.out.println("U1 launched successfully!");
+            System.out.println("U2 launched successfully!");
             return true;
         }
     }
@@ -84,11 +84,11 @@ public class U2 extends Rocket {
         chanceLanded = crashRange *  getWeightCarried()/ getMaxWeight();
 
         if (chanceLanded >= rand) {
-            System.out.println("U1 CRASHED!!!");
+            System.out.println("U2 CRASHED!!!");
             System.out.println("...Sending another rocket because it crashed...");
             return false;
         } else {
-            System.out.println("U1 landed successfully!");
+            System.out.println("U2 landed successfully!");
             return true;
         }
     }

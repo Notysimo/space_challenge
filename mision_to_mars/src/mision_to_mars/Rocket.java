@@ -1,4 +1,4 @@
-package com.minios;
+package mision_to_mars;
 
 /***
  * Handle the Rocket information.
@@ -109,7 +109,7 @@ public class Rocket implements Spaceship {
      */
     @Override
     public boolean canCarry(Item item) {
-        if (maxWeight >= (maxWeight + item.getWeight())) {
+        if (maxWeight >= (weightCarried + item.getWeight())) {
 
             return true;
         } else {
