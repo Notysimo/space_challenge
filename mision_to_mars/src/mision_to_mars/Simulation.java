@@ -2,15 +2,14 @@ package mision_to_mars;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * This class consists in the simulation for two rockets.
- * This class contains methods creates a simulation
+ * This class contains methods creates a simulation.
  *
- * @author Andres Uzeda
+ * @author Andres Uzeda.
  * @version 1.0
  * @since February 6, 2019
  */
@@ -18,13 +17,13 @@ public class Simulation {
 
     /**
      * This method returns a list of items in a document
-     * path e.g "items_to_load/phase-1.txt"
+     * path e.g "items_to_load/phase-1.txt".
      *
      * @return a list of items
      */
     public ArrayList<Item> readData(String path) {
         try {
-            return getAlistItem(path);
+            return getAListItem(path);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -32,7 +31,7 @@ public class Simulation {
     }
 
     /**
-     * This method returns a list of items in a rocket
+     * This method returns a list of items in a rocket.
      *
      * @param rocket
      * @param listOfItemsToCarry
@@ -51,7 +50,7 @@ public class Simulation {
     }
 
     /**
-     * This method run simulation for two rockets
+     * This method run simulation for two rockets.
      */
     public void runSimulation() {
         //create a rockets
@@ -80,7 +79,7 @@ public class Simulation {
     }
 
     /**
-     * This method do a launching, landing and free the items
+     * This method do a launching, landing and free the items.
      *
      * @param rocket
      */
@@ -91,13 +90,13 @@ public class Simulation {
     }
 
     /**
-     * This method return a list of each line in a document
+     * This method return a list of each line in a document.
      *
      * @param path
      * @return list of each line in a document
      * @throws FileNotFoundException
      */
-    private ArrayList<String> getAlistItemsFromAFile(String path) throws FileNotFoundException {
+    private ArrayList<String> getAListItemsFromAFile(String path) throws FileNotFoundException {
         ArrayList<String> listOfStrings = new ArrayList<>();
         File file = new File(path);
         Scanner scanner = new Scanner(file);
@@ -109,17 +108,16 @@ public class Simulation {
     }
 
     /**
-     * This method return a list of items
+     * This method return a list of items.
      *
      * @param path
      * @return a list of Item
      * @throws FileNotFoundException
      */
-    private ArrayList<Item> getAlistItem(String path) throws FileNotFoundException {
-        ArrayList<String> ListOfStrings = getAlistItemsFromAFile(path);
+    private ArrayList<Item> getAListItem(String path) throws FileNotFoundException {
+        ArrayList<String> ListOfStrings = getAListItemsFromAFile(path);
         ArrayList<Item> ListItems = new ArrayList<>();
-        for (String aString : ListOfStrings
-        ) {
+        for (String aString : ListOfStrings) {
             String[] arrayWords = aString.trim().split("=");
             Item item = new Item(arrayWords[0], Integer.valueOf(arrayWords[1]));
             ListItems.add(item);
@@ -128,14 +126,13 @@ public class Simulation {
     }
 
     /**
-     * This method print a list of items by console
+     * This method print a list of items by console.
      */
     private void printAListOfItems(ArrayList<Item> itemList, String rocketName) {
-        System.out.println("The following items were added to " + rocketName + " Rocket:");
+        System.out.println(String.format("The following items were added to %s  Rocket:", rocketName));
         for (Item item : itemList) {
-            System.out.println(String.format("Item: %1$s " +
-                    " Weight: %2$s", item.getName(), item.getWeight()));
+            System.out.println(String.format("Item: %1$s  Weight: %2$s",
+                    item.getName(), item.getWeight()));
         }
     }
-
 }
