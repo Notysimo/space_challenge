@@ -1,16 +1,21 @@
 package mision_to_mars;
 
 /**
- *TODO marco add info to this class you created that
+ * Main class to Run the project.
+ *
+ * @author marco Mendez.
+ * @version 1.0
+ * @since February 9, 2019.
  */
 public class Main {
 
     /**
-     * This method run the simulation
+     * This method run the simulation.
+     *
      * @param args
      */
-    public static void main(String[] args){
-        Simulation misionToMars = new Simulation();
-        misionToMars.runSimulation();
+    public static void main(String[] args) {
+        Simulation simulation = new Simulation();
+        simulation.runSimulation();
     }
 }

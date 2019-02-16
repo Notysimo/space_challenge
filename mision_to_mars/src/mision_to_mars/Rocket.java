@@ -3,9 +3,9 @@ package mision_to_mars;
 /***
  * Handle the Rocket information.
  *
- * @author Marco Mendez
- * @since Saturday 09, 2019
+ * @author Marco Mendez.
  * @version 1.0
+ * @since Saturday 09, 2019.
  */
 public class Rocket implements Spaceship {
 
@@ -16,6 +16,7 @@ public class Rocket implements Spaceship {
 
     /**
      * Sets Cost value.
+     *
      * @param cost - double value.
      */
     public void setCost(double cost) {
@@ -24,6 +25,7 @@ public class Rocket implements Spaceship {
 
     /**
      * Sets Weight value.
+     *
      * @param weight - double value.
      */
     public void setWeight(double weight) {
@@ -32,6 +34,7 @@ public class Rocket implements Spaceship {
 
     /**
      * Sets Max Weight value.
+     *
      * @param maxWeight - double value.
      */
     public void setMaxWeight(double maxWeight) {
@@ -40,6 +43,7 @@ public class Rocket implements Spaceship {
 
     /**
      * Sets Weight carried.
+     *
      * @param weightCarried - double value.
      */
     public void setWeightCarried(double weightCarried) {
@@ -47,23 +51,8 @@ public class Rocket implements Spaceship {
     }
 
     /**
-     * Gets cost value.
-     * @return double value.
-     */
-    public double getCost() {
-        return cost;
-    }
-
-    /**
-     * Gets Weight value.
-     * @return double value.
-     */
-    public double getWeight() {
-        return weight;
-    }
-
-    /**
      * Gets Max Weight value.
+     *
      * @return
      */
     public double getMaxWeight() {
@@ -72,6 +61,7 @@ public class Rocket implements Spaceship {
 
     /**
      * Gets Weight carried.
+     *
      * @return double value.
      */
     public double getWeightCarried() {
@@ -79,13 +69,12 @@ public class Rocket implements Spaceship {
     }
 
     /**
-     * Verifies if it's possible to launch a rocket,
+     * Verifies if it's possible to launch a rocket.
      *
      * @return boolean,
      */
     @Override
     public boolean launch() {
-
         return true;
     }
 
@@ -95,13 +84,12 @@ public class Rocket implements Spaceship {
      * @return boolean
      */
     @Override
-    public boolean land()
-    {
+    public boolean land() {
         return true;
     }
 
     /**
-     * Verifies if it's possible to carry an item.
+     * Verifies if it's possible to carry an item
      * in a rocket.
      *
      * @param item - contain name and weight values.
@@ -110,22 +98,11 @@ public class Rocket implements Spaceship {
     @Override
     public boolean canCarry(Item item) {
         if (maxWeight >= (weightCarried + item.getWeight())) {
-
             return true;
         } else {
-            System.out.println("Can't carry item: " + item.getName() + "\tWeight: " + item.getWeight());
+            System.out.println(String.format("Can't carry item: %s \tWeight: %s",
+                    item.getName(), item.getWeight()));
             return false;
         }
-    }
-
-    /**
-     * Adds an item in a rocket
-     *
-     * @param item - Item object that contain information.
-     */
-    @Override
-    public void carry(Item item) {
-        System.out.println("Carrying item: " + item.getName() + "\tWeight: " + item.getWeight());
-        weightCarried += item.getWeight();
     }
 }
